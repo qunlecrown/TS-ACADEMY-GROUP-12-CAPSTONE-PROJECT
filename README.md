@@ -38,25 +38,25 @@ During preprocessing, the categorical transaction type variable was transformed 
 
 **Data Visualization** was then used to better understand the structure of the dataset and highlight the relationsip between variables. Correlation Analysis was then performed to identify relationships between numerical features such as - `transaction_amount`.
 
+### Model Development and Evaluation
 
+**Machine Learning Models**
 
-
-
-### Machine Learning Models
-
-Two models were implemented to detect fraudulent transactions.
+The Logistic Regression model and Random Forest Classification model were used in the evaluation stage.
 
 **Logistic Regression**
 
 Logistic Regression served as the **baseline model** to determine whether fraudulent transactions could be separated using a linear classification approach.
-
 The model estimates the probability that a transaction is fraudulent based on weighted combinations of input features.
 
 **Random Forest**
 
 The advanced model used in the project was Random Forest, an ensemble learning algorithm composed of multiple decision trees. Each tree produces a prediction, and the final classification is determined through majority voting.
-
 Random Forest was selected because it can capture complex non-linear relationships between transaction amount, transaction timing, and account behavior.
+
+To further improve the model’s performance, **hyperparameter tuning** was performed using **Grid Search Cross-Validation (GridSearchCV)** to evaluate different combinations of hyperparameters. The search used a parameter grid consisting of **162 unique combinations**, calculated from the possible values for five hyperparameters. Each combination was evaluated using **3-fold cross-validation** on the balanced training dataset containing **97,066 samples**, resulting in a total of **486 model training runs**.
+
+The evaluation metric used during the tuning process was `ROC–AUC`, which measures the model’s ability to distinguish between fraudulent and non-fraudulent transactions across different classification thresholds.The best parameters were `max_depth = 10`, `max_features = 'sqrt'`, `min_samples_leaf = 25`, `min_samples_split = 50`, and `n_estimators = 100`, achieving a `ROC-AUC of 0.9993`. The tuned model slightly improved performance: precision increased to **0.60**, recall to 0.98, and `F1 score to 0.75`, indicating better fraud detection with fewer missed cases and false alarms.
 
 
 
