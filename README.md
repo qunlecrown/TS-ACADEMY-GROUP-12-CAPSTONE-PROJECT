@@ -19,20 +19,15 @@ Target: **isFraud** (Highly imbalanced: <1% Fraud)
 https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim
 
 ## Data Preparation
-The project analysis began with an exploration of the dataset to understand its structure and characteristics. The dataset contains over five million records and multiple features describing transaction behavior. Initial inspection involved **viewing sample records**, **checking the dataset shape**, and **reviewing data types** to understand the format of each variable. **Descriptive statistics** were generated to summarize numerical features, while checks for **missing and zero values** ensured the dataset was suitable for further analysis.\ 
+The project analysis began with an exploration of the dataset to understand its structure and characteristics. The dataset contains over five million records and multiple features describing transaction behavior. Initial inspection involved **viewing sample records**, **checking the dataset shape**, and **reviewing data types** to understand the format of each variable. **Descriptive statistics** were generated to summarize numerical features, while checks for **missing and zero values** ensured the dataset was suitable for further analysis.  
 Categorical columns were explored to identify unique values and frequency distributions. Some columns were filtered and renamed where necessary to improve readability and prepare the dataset for analysis
 
 
-## Preprocessing and Exploratory Data Analysis (EDA)
-
-In the preprocessing stage, the dataset was transformed and explored to understand relationships between variables.
-
-Encoding Categorical Data
-
+## Preprocessing and Exploratory Data Analysis (EDA)  
+In the preprocessing stage, the dataset was transformed and explored to understand relationships between variables.  
+**Encoding Categorical Data**  
 The Transaction_type column was the only categorical variable in text format. It was encoded using LabelEncoder from the scikit-learn library.
-
-During preprocessing, the categorical transaction type variable was transformed into numerical form using label encoding from scikit-learn library so that it could be used in machine learning models. The encoded values represented different transaction types such as:
-
+During preprocessing, the categorical transaction type variable was transformed into numerical form using label encoding from scikit-learn library so that it could be used in machine learning models. The encoded values represented different transaction types such as:  
 - `transaction_type` (CASH_IN, CASH_OUT, TRANSFER, DEBIT etc.)
 
 **Exploratory analysis** was then conducted to understand the distribution of fraudulent and non-fraudulent transactions. The results showed that fraudulent transactions represent a very small proportion of the dataset, indicating a strong class imbalance. Additional analysis examined relationships between transaction types, transaction amounts, and account balances to determine patterns associated with fraudulent activity.
@@ -41,17 +36,14 @@ During preprocessing, the categorical transaction type variable was transformed 
 
 ## Model Development and Evaluation
 
-**Machine Learning Models**
-
+**Machine Learning Models**  
 The Logistic Regression model and Random Forest Classification model were used in the evaluation stage.
 
-**Logistic Regression**
-
+**Logistic Regression**  
 Logistic Regression served as the **baseline model** to determine whether fraudulent transactions could be separated using a linear classification approach.
 The model estimates the probability that a transaction is fraudulent based on weighted combinations of input features.
 
-**Random Forest**
-
+**Random Forest**  
 The advanced model used in the project was Random Forest, an ensemble learning algorithm composed of multiple decision trees. Each tree produces a prediction, and the final classification is determined through majority voting.
 Random Forest was selected because it can capture complex non-linear relationships between transaction amount, transaction timing, and account behavior.
 
@@ -61,7 +53,18 @@ The evaluation metric used during the tuning process was `ROC–AUC`, which meas
 
 
 
-## Conclusion
+## Conclusion and Recommendation  
+
+**Recommendation**  
+
+Based on the findings of the analysis, the organisation should strengthen its fraud prevention framework by focusing on the most significant risk indicators identified in the dataset. First, real-time velocity monitoring should be implemented so that transactions associated with unusually high values of total_sent_last_1hr, particularly those above the 75th percentile threshold of 304,943, trigger immediate secondary authentication. This is necessary because rapid spending within a short period emerged as the strongest short-term fraud signal.  
+In addition, `TRANSFER` and `CASH_OUT` transactions should be subjected to stricter verification procedures. Given their fraud rates of 8.3% and 2.7% respectively, these transaction types present greater exposure to fraudulent activity, especially where the transaction amount is close to the sender’s available balance. Measures such as one-time passwords or biometric confirmation would help reduce this risk.  
+The organisation should also adopt end-of-month fraud response measures. Since Week 4 recorded the highest fraud concentration at 29.78%, compared with 22–24% in earlier weeks, fraud monitoring systems should be more sensitive and investigation teams better prepared during the final seven days of each month.  
+Furthermore, repeat receiver accounts linked to fraud should be continuously monitored. The 4,937 mule accounts identified in Stage 3 should be flagged in real time, and any transaction involving them should automatically prompt a fraud review.
+
+Finally, future versions of the fraud detection model should include additional variables such as sender account age, device fingerprint consistency, and geographic velocity. These features would improve the model’s ability to detect more complex fraud patterns not fully captured by the current six-feature model.  
+
+**Conclusion**  
 
 The **TS Academy Capstone Project – Group 12**  project demonstrates a comprehensive fraud detection workflow that includes data preparation, exploratory analysis, visualization, and machine learning model optimization. The analysis revealed key behavioral patterns within transaction data and highlighted the challenge of detecting fraud within highly imbalanced datasets. Exploratory analysis revealed that fraudulent activities occur primarily in **TRANSFER** and **CASH-OUT** transactions, and that fraud cases are extremely rare compared to normal transactions. Visualization techniques further helped identify patterns and anomalies within the data. Through hyperparameter tuning, the **Random Forest model** achieved improved performance, demonstrating its effectiveness in identifying potentially fraudulent transactions within the dataset.
 
@@ -73,7 +76,7 @@ Overall, the results show that machine learning models play an important role in
 ## Acknowledgments
 
 **Tutor:** Hart Ofigwe  
-**Institution:** TS Academy 
+**Institution:** TS Academy  
 **Group 12:** Members
 
 ## References
@@ -87,8 +90,3 @@ Overall, the results show that machine learning models play an important role in
 
 **License:** Apache License 2.0  
 **Copyright:** © 2026 TS Academy Capstone Project – Group 12
-
-pd.crosstab(df['Transaction_type'], df['fraud_label'])
-
-This analysis helped identify which transaction types were more commonly associated with fraudulent behavior.
-Fraud label indicating whether the transaction is fraudulent
