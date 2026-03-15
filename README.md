@@ -5,7 +5,7 @@ The capstone project is a TS Academy Group 12 data science project that analyzes
 With over 5.4 million synthetic simulator (PaySim) transaction data, our goal was to understand patterns within transaction data and build a machine learning model capable of identifying potentially fraudulent transactions.
 The objective was to transition from a linear baseline model to an advanced ensemble architecture in order to achieve maximum detection sensitivity (Recall) while effectively handling high-dimensional financial data.
 
-### Dataset
+#### Dataset
 The dataset used for this analysis is the PaySim Fraud Detection Dataset, which simulates mobile money transactions and includes both legitimate and fraudulent activities.
 
 Dataset: PaySim (With_Aggregated_Version)
@@ -17,8 +17,12 @@ Target: **isFraud** (Highly imbalanced: <1% Fraud)
 🔗 Dataset Link  
 https://www.kaggle.com/datasets/chendoytshman/fraud-detection-paysim
 
+### Data Preparation
+The project analysis began with an exploration of the dataset to understand its structure and characteristics. The dataset contains over five million records and multiple features describing transaction behavior. Initial inspection involved **viewing sample records**, **checking the dataset shape**, and **reviewing data types** to understand the format of each variable. **Descriptive statistics** were generated to summarize numerical features, while checks for **missing and zero values** ensured the dataset was suitable for further analysis.\ 
+Categorical columns were explored to identify unique values and frequency distributions. Some columns were filtered and renamed where necessary to improve readability and prepare the dataset for analysis
 
-**Data Preprocessing and Exploratory Data Analysis\**
+
+### Preprocessing and Exploratory Data Analysis (EDA)
 
 In the preprocessing stage, the dataset was transformed and explored to understand relationships between variables.
 
@@ -26,19 +30,44 @@ Encoding Categorical Data
 
 The Transaction_type column was the only categorical variable in text format. It was encoded using LabelEncoder from the scikit-learn library.
 
-A new column named transaction_type_encoded was created where each category was assigned a numerical label:
+During preprocessing, the categorical transaction type variable was transformed into numerical form using label encoding from scikit-learn library so that it could be used in machine learning models. The encoded values represented different transaction types such as:
 
-0 – CASH_IN
+- `transaction_type` (CASH_IN,CASH_OUT, TRANSFER, DEBIT etc.)
 
-1 – CASH_OUT
+**Exploratory analysis** was then conducted to understand the distribution of fraudulent and non-fraudulent transactions. The results showed that fraudulent transactions represent a very small proportion of the dataset, indicating a strong class imbalance. Additional analysis examined relationships between transaction types, transaction amounts, and account balances to determine patterns associated with fraudulent activity.
 
-2 – DEBIT
+**Data Visualization** was then used to better understand the structure of the dataset and highlight the relationsip between variables. Correlation Analysis was then performed to identify relationships between numerical features such as - `transaction_amount`.
 
-3 – PAYMENT
 
-4 – TRANSFER
 
-This transformation allowed the machine learning model to process the categorical feature.
+
+
+### Machine Learning Models
+
+Two models were implemented to detect fraudulent transactions.
+
+**Logistic Regression**
+
+Logistic Regression served as the **baseline model** to determine whether fraudulent transactions could be separated using a linear classification approach.
+
+The model estimates the probability that a transaction is fraudulent based on weighted combinations of input features.
+
+**Random Forest**
+
+The advanced model used in the project was Random Forest, an ensemble learning algorithm composed of multiple decision trees. Each tree produces a prediction, and the final classification is determined through majority voting.
+
+Random Forest was selected because it can capture complex non-linear relationships between transaction amount, transaction timing, and account behavior.
+
+
+
+
+
+
+
+
+
+
+
 
 Fraud Distribution Analysis
 
@@ -46,24 +75,12 @@ The distribution of the fraud label was examined using:
 
 df['fraud_label'].value_counts(normalize=True)
 
-The analysis showed that fraudulent transactions represented a small proportion of the dataset, confirming that the data is highly imbalanced, which is common in fraud detection problems.
-
 Transaction Type vs Fraud
 
 A cross-tabulation analysis was performed:
 
 
 
-## 3. Technical Methodology
-
-### A. Data Cleaning
-
-To ensure efficient processing of the large dataset, the following preprocessing steps were performed:
-
-**Cleaning & Audit**
-
-- Verified **zero missing values**
-- Checked for possible **data leakage**
 
 **Feature Encoding**
 
@@ -169,17 +186,18 @@ Using **Gini Importance**, the Random Forest model identified the following **to
 
 ## 7. Conclusion
 
-The **TS Academy Capstone Project – Group 12**  project demonstrates a complete fraud detection workflow that includes data preparation, exploratory analysis, visualization, and machine learning model optimization. The analysis revealed key behavioral patterns within transaction data and highlighted the challenge of detecting fraud within highly imbalanced datasets. Exploratory analysis revealed that fraudulent activities occur primarily in **TRANSFER** and **CASH-OUT** transactions, and that fraud cases are extremely rare compared to normal transactions. Visualization techniques further helped identify patterns and anomalies within the data. Through hyperparameter tuning, the **Random Forest model** achieved improved performance, demonstrating its effectiveness in identifying potentially fraudulent transactions within the dataset.
+The **TS Academy Capstone Project – Group 12**  project demonstrates a comprehensive fraud detection workflow that includes data preparation, exploratory analysis, visualization, and machine learning model optimization. The analysis revealed key behavioral patterns within transaction data and highlighted the challenge of detecting fraud within highly imbalanced datasets. Exploratory analysis revealed that fraudulent activities occur primarily in **TRANSFER** and **CASH-OUT** transactions, and that fraud cases are extremely rare compared to normal transactions. Visualization techniques further helped identify patterns and anomalies within the data. Through hyperparameter tuning, the **Random Forest model** achieved improved performance, demonstrating its effectiveness in identifying potentially fraudulent transactions within the dataset.
 
-These findings demonstrate how data analysis, visualization and machine learning can support fraud detection systems in financial institutions. 
+These findings highlights the value of combining data analysis, visualization and machine learning to strengthen fraud detection systems in financial institutions. 
 Such systems are essential for improving security in digital financial services and reducing the risk of financial fraud.
 
 Overall, the results show that machine learning models play an important role in improving fraud detection systems and helping financial institutions identify suspicious transactions more effectively.
 
-## 8. Acknowledgments & License
+## 8. Acknowledgments
 
 **Tutor:** Hart Ofigwe  
-**Institution:** TS Academy  
+**Institution:** TS Academy
+**Group 12:** Members
 
 ## 9. References
 
