@@ -1,4 +1,4 @@
- TS ACADEMY CAPSTONE PROJECT — Group 12 (March 2026)
+# TS ACADEMY CAPSTONE PROJECT — Group 12 (March 2026)
 ### Mobile Money Fraud Detection through Classification Models
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
@@ -349,3 +349,5 @@ These findings highlight the value of combining data analysis, visualization and
 <div align="center">
 
 *Built with precision. Validated with evidence.*
+
+</div>
